@@ -1,0 +1,16 @@
+{
+  "name": "diagram_assistant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently -n web,api -c auto \"npm --prefix apps/web run dev\" \"npm --prefix apps/api run dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
