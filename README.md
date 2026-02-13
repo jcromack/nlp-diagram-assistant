@@ -147,7 +147,8 @@ Behavior:
 ## Adding Multiple Steps
 
 ```
-add steps called final1 final2 and final3
+add steps final1, final2 and final3
+add steps final1 final2 and final3
 add steps next and done
 ```
 
