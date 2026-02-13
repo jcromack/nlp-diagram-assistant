@@ -1,12 +1,29 @@
 import OpenAI from "openai"
 import { ChatMessage } from "./provider"
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+function getClient() {
+  if (!process.env.OPENAI_API_KEY) {
+    return null
+  }
+
+  return new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+  })
+}
+
+
 
 export async function* streamGenAIExplanation(
   messages: ChatMessage[],
   diagram?: string
 ): AsyncGenerator<string> {
+
+
+  const openai = getClient()
+
+  if (!openai) {
+    throw new Error("GenAI mode not enabled. Please set OPENAI_API_KEY.")
+  }
 
   const completion = await openai.chat.completions.create({
     model: "gpt-4.1-mini",
@@ -52,6 +69,13 @@ export async function generateFinalDiagram(
   diagram?: string
 ): Promise<string> {
 
+
+  const openai = getClient()
+
+  if (!openai) {
+    throw new Error("GenAI mode not enabled. Please set OPENAI_API_KEY.")
+  }
+  
   const completion = await openai.chat.completions.create({
     model: "gpt-4.1-mini",
     messages: [
